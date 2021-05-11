@@ -17,7 +17,7 @@ CORS(app)
 !! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
 !! Running this funciton will add one
 '''
-# db_drop_and_create_all()
+db_drop_and_create_all()
 
 
 def get_drinks_short():
@@ -37,8 +37,6 @@ def get_drinks_long():
 # ROUTES
 @app.route('/drinks', methods=['GET'])
 def get_drinks():
-    drinks = Drink.query.all()
-
     return jsonify({
         'success': True,
         'drinks': get_drinks_short()
@@ -108,7 +106,6 @@ def get_drinks_patch(payload, id):
 def get_drinks_delete(payload, id):
     try:
         drink = Drink.query.get(id)
-        print(drink)
         if drink is None:
             abort(404)
 
@@ -152,7 +149,6 @@ def not_found(error):
 
 @app.errorhandler(AuthError)
 def authentification_failed(AuthError):
-    print(AuthError)
     return jsonify({
         "success": False,
         "error": AuthError.status_code,
