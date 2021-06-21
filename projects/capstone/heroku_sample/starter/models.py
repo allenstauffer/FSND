@@ -1,9 +1,10 @@
-from sqlalchemy import Column, String, create_engine
+import os
+from sqlalchemy import Column, String, Integer, create_engine
 from flask_sqlalchemy import SQLAlchemy
 import json
 
-database_path = os.environ['DATABASE_URL']
-
+database_path = os.getenv('DATABASE_URL', '127.0.0.1:5432')  
+test = 'test'
 db = SQLAlchemy()
 
 '''
